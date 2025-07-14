@@ -1,4 +1,4 @@
-baseURL: "https://arslankhanali.github.io/mysite/"
+baseURL: "https://arslankhanali.github.io/"
 title: "Arslan's Docs & Blog"
 theme: "hugo-book"
 defaultContentLanguage: "en"
@@ -25,7 +25,6 @@ params:
   BookTranslatedOnly: false
 
 # Book configuration
-disqusShortname: "your-disqus-shortname"
 disablePathToLower: true
 enableGitInfo: true
 
