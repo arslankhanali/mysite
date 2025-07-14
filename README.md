@@ -34,7 +34,7 @@ git add -A
 git commit -m "Create hugo.yaml"
 git push
 ```
-
+See progress [https://github.com/arslankhanali/mysite/actions](https://github.com/arslankhanali/mysite/actions)  
 Live site: [https://arslankhanali.github.io/mysite/](https://arslankhanali.github.io/mysite/)
 
 ---

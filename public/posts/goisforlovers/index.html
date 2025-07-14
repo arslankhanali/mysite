@@ -3,13 +3,16 @@
 <head><script src="/mysite/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=mysite/livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Hugo uses the excellent Go html/template library for
+<meta name="description" content="Hugo uses the excellent 
+  Go 
+  html/template library for
 its template engine. It is an extremely lightweight engine that provides a very
 small amount of logic. In our experience that it is just the right amount of
 logic to be able to create a good static website. If you have used other
 template systems from different languages or frameworks you will find a lot of
 similarities in Go templates.
-This document is a brief primer on using Go templates. The Go docs
+This document is a brief primer on using Go templates. The 
+  Go docs
 provide more details.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
@@ -22,19 +25,21 @@ This document is a brief primer on using Go templates. The Go docs provide more 
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2014-04-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2014-04-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-14T19:30:46+10:00">
     <meta property="article:tag" content="Go">
     <meta property="article:tag" content="Golang">
     <meta property="article:tag" content="Templates">
     <meta property="article:tag" content="Themes">
     <meta property="article:tag" content="Development">
 <title>(Hu)go Template Primer | Arslan&#39;s Docs &amp; Blog</title>
-<link rel="icon" href="/mysite/favicon.png" >
+<link rel="icon" href="/mysite/favicon.ico" >
 <link rel="manifest" href="/mysite/manifest.json">
 <link rel="canonical" href="http://localhost:1313/mysite/posts/goisforlovers/">
-<link rel="stylesheet" href="/mysite/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+<link rel="stylesheet" href="/mysite/book.min.27c601ff251cc5c9796bb272aace960013cf351d0c28a7e1301487b32d4800ee.css" integrity="sha256-J8YB/yUcxcl5a7Jyqs6WABPPNR0MKKfhMBSHsy1IAO4=" crossorigin="anonymous">
   <script defer src="/mysite/fuse.min.js"></script>
-  <script defer src="/mysite/en.search.min.11f8daf5bb853b22cab754dc08d049fddddc463014b297d593a881fc0eedfb6c.js" integrity="sha256-Efja9buFOyLKt1TcCNBJ/d3cRjAUspfVk6iB/A7t&#43;2w=" crossorigin="anonymous"></script>
+  <script defer src="/mysite/en.search.min.e53682d50ad49f2c45d5606b9e9f455721492a5c5deaa06e8c0e329f5334810f.js" integrity="sha256-5TaC1QrUnyxF1WBrnp9FVyFJKlxd6qBujA4yn1M0gQ8=" crossorigin="anonymous"></script>
+
+  <script defer src="/mysite/sw.min.415651913d216b47476b5feff9101226a3031dcb63214cb02f2e634235223251.js" integrity="sha256-QVZRkT0ha0dHa1/v&#43;RASJqMDHctjIUywLy5jQjUiMlE=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -325,6 +330,24 @@ https://github.com/alex-shpak/hugo-book
 
 
 
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/alex-shpak/hugo-book"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://themes.gohugo.io/themes/hugo-book/"  target="_blank" rel="noopener">
+        Hugo Themes
+      </a>
+  </li>
+  
+</ul>
+
+
 
 
 
@@ -365,24 +388,29 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#introduction-to-go-templates">Introduction to Go Templates</a></li>
-    <li><a href="#basic-syntax">Basic Syntax</a></li>
-    <li><a href="#variables">Variables</a></li>
-    <li><a href="#functions">Functions</a></li>
-    <li><a href="#includes">Includes</a></li>
-    <li><a href="#logic">Logic</a>
+    <li>
       <ul>
-        <li><a href="#iteration">Iteration</a></li>
-        <li><a href="#conditionals">Conditionals</a></li>
+        <li><a href="#introduction-to-go-templates">Introduction to Go Templates</a></li>
+        <li><a href="#basic-syntax">Basic Syntax</a></li>
+        <li><a href="#variables">Variables</a></li>
+        <li><a href="#functions">Functions</a></li>
+        <li><a href="#includes">Includes</a></li>
+        <li><a href="#logic">Logic</a>
+          <ul>
+            <li><a href="#iteration">Iteration</a></li>
+            <li><a href="#conditionals">Conditionals</a></li>
+          </ul>
+        </li>
+        <li><a href="#pipes">Pipes</a></li>
+        <li><a href="#context-aka-the-dot">Context (aka. the dot)</a></li>
       </ul>
     </li>
-    <li><a href="#pipes">Pipes</a></li>
-    <li><a href="#context-aka-the-dot">Context (aka. the dot)</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#using-content-page-parameters">Using Content (page) Parameters</a></li>
-    <li><a href="#using-site-config-parameters">Using Site (config) Parameters</a></li>
+    <li><a href="#hugo-parameters">Hugo Parameters</a>
+      <ul>
+        <li><a href="#using-content-page-parameters">Using Content (page) Parameters</a></li>
+        <li><a href="#using-site-config-parameters">Using Site (config) Parameters</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -410,7 +438,7 @@ https://github.com/alex-shpak/hugo-book
   
   <div class="text-small">
     
-      <a href="/mysite/categories/development/">Development</a>, 
+      <a href="/mysite/categories/Development/">Development</a>, 
       <a href="/mysite/categories/golang/">Golang</a>
   </div>
   
@@ -427,13 +455,16 @@ https://github.com/alex-shpak/hugo-book
   
 
 
-  <div class="book-post-content"><p>Hugo uses the excellent <a href="https://golang.org/">Go</a> <a href="https://golang.org/pkg/html/template/">html/template</a> library for
+  <div class="book-post-content"><p>Hugo uses the excellent 
+  <a href="https://golang.org/">Go</a> 
+  <a href="https://golang.org/pkg/html/template/">html/template</a> library for
 its template engine. It is an extremely lightweight engine that provides a very
 small amount of logic. In our experience that it is just the right amount of
 logic to be able to create a good static website. If you have used other
 template systems from different languages or frameworks you will find a lot of
 similarities in Go templates.</p>
-<p>This document is a brief primer on using Go templates. The <a href="https://golang.org/pkg/html/template/">Go docs</a>
+<p>This document is a brief primer on using Go templates. The 
+  <a href="https://golang.org/pkg/html/template/">Go docs</a>
 provide more details.</p>
 <h2 id="introduction-to-go-templates">
   Introduction to Go Templates
@@ -444,7 +475,8 @@ belief that only the most basic of logic belongs in the template or view layer.
 One consequence of this simplicity is that Go templates parse very quickly.</p>
 <p>A unique characteristic of Go templates is they are content aware. Variables and
 content will be sanitized depending on the context of where they are used. More
-details can be found in the <a href="https://golang.org/pkg/html/template/">Go docs</a>.</p>
+details can be found in the 
+  <a href="https://golang.org/pkg/html/template/">Go docs</a>.</p>
 <h2 id="basic-syntax">
   Basic Syntax
   <a class="anchor" href="#basic-syntax">#</a>
@@ -473,7 +505,8 @@ functions.</p>
 <p>Each Go template has a struct (object) made available to it. In hugo each
 template is passed either a page or a node struct depending on which type of
 page you are rendering. More details are available on the
-<a href="/layout/variables">variables</a> page.</p>
+
+  <a href="/layout/variables">variables</a> page.</p>
 <p>A variable is accessed by referencing the variable name.</p>
 <pre><code>&lt;title&gt;{{ .Title }}&lt;/title&gt;
 </code></pre>
@@ -487,7 +520,8 @@ page you are rendering. More details are available on the
 </h2>
 <p>Go template ship with a few functions which provide basic functionality. The Go
 template system also provides a mechanism for applications to extend the
-available functions with their own. <a href="/layout/functions">Hugo template
+available functions with their own. 
+  <a href="/layout/functions">Hugo template
 functions</a> provide some additional functionality we believe
 are useful for building websites. Functions are called by using their name
 followed by the required parameters separated by spaces. Template
@@ -642,7 +676,8 @@ you want to inside of your templates.</p>
   <a class="anchor" href="#using-content-page-parameters">#</a>
 </h2>
 <p>In each piece of content you can provide variables to be used by the
-templates. This happens in the <a href="/content/front-matter">front matter</a>.</p>
+templates. This happens in the 
+  <a href="/content/front-matter">front matter</a>.</p>
 <p>An example of this is used in this documentation site. Most of the pages
 benefit from having the table of contents provided. Sometimes the TOC just
 doesn&rsquo;t make a lot of sense. We&rsquo;ve defined a variable in our front matter
@@ -709,7 +744,20 @@ so, such as in this example:</p>
   <div class="flex flex-wrap justify-between">
 
 
+  <div><a class="flex align-center" href="https://github.com/arslankhanali/mysite/commit/49448a0c482d1627b28c50f8f436fde0aca8cd69" title='Last modified by arslankhan | July 14, 2025' target="_blank" rel="noopener">
+      <img src="/mysite/svg/calendar.svg" class="book-icon" alt="" />
+      <span>July 14, 2025</span>
+    </a>
+  </div>
 
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/arslankhanali/mysite/edit/main/content/content/posts/goisforlovers.md" target="_blank" rel="noopener">
+      <img src="/mysite/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
 
 
 </div>
@@ -741,24 +789,29 @@ so, such as in this example:</p>
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#introduction-to-go-templates">Introduction to Go Templates</a></li>
-    <li><a href="#basic-syntax">Basic Syntax</a></li>
-    <li><a href="#variables">Variables</a></li>
-    <li><a href="#functions">Functions</a></li>
-    <li><a href="#includes">Includes</a></li>
-    <li><a href="#logic">Logic</a>
+    <li>
       <ul>
-        <li><a href="#iteration">Iteration</a></li>
-        <li><a href="#conditionals">Conditionals</a></li>
+        <li><a href="#introduction-to-go-templates">Introduction to Go Templates</a></li>
+        <li><a href="#basic-syntax">Basic Syntax</a></li>
+        <li><a href="#variables">Variables</a></li>
+        <li><a href="#functions">Functions</a></li>
+        <li><a href="#includes">Includes</a></li>
+        <li><a href="#logic">Logic</a>
+          <ul>
+            <li><a href="#iteration">Iteration</a></li>
+            <li><a href="#conditionals">Conditionals</a></li>
+          </ul>
+        </li>
+        <li><a href="#pipes">Pipes</a></li>
+        <li><a href="#context-aka-the-dot">Context (aka. the dot)</a></li>
       </ul>
     </li>
-    <li><a href="#pipes">Pipes</a></li>
-    <li><a href="#context-aka-the-dot">Context (aka. the dot)</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#using-content-page-parameters">Using Content (page) Parameters</a></li>
-    <li><a href="#using-site-config-parameters">Using Site (config) Parameters</a></li>
+    <li><a href="#hugo-parameters">Hugo Parameters</a>
+      <ul>
+        <li><a href="#using-content-page-parameters">Using Content (page) Parameters</a></li>
+        <li><a href="#using-site-config-parameters">Using Site (config) Parameters</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
