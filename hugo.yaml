@@ -24,8 +24,8 @@ params:
   BookServiceWorker: true
   BookTranslatedOnly: false
 
-
 # Book configuration
+disqusShortname: "your-disqus-shortname"
 disablePathToLower: true
 enableGitInfo: true
 
