@@ -17,7 +17,7 @@ params:
   BookRepo: "https://github.com/arslankhanali/mysite"
   BookCommitPath: "commit"
   BookEditPath: "edit/main/content"
-  BookDateFormat: "January 2, 2006"
+  BookDateFormat: "2 January 2006"
   BookSearch: true
   BookComments: true
   BookPortableLinks: true
